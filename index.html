@@ -568,8 +568,15 @@
             pdfTitle.textContent = pdfName;
             container.innerHTML = '';
             
+            // URL absoluta do PDF no GitHub Pages
+            const baseUrl = window.location.href.replace(/\/[^\/]*$/, '/');
+            const fullUrl = pdfPath.startsWith('http') ? pdfPath : baseUrl + pdfPath;
+            
+            // Google Docs Viewer - funciona em qualquer hospedagem
+            const viewerUrl = 'https://docs.google.com/viewer?embedded=true&url=' + encodeURIComponent(fullUrl);
+            
             const iframe = document.createElement('iframe');
-            iframe.src = pdfPath;
+            iframe.src = viewerUrl;
             iframe.style.width = '100%';
             iframe.style.height = '100%';
             iframe.style.border = 'none';
